@@ -2,9 +2,6 @@ package com.example.estoque.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "produtos")
@@ -16,8 +13,17 @@ public class Product {
     private String tipo;
     private String marca;
     private Double preco;
+    private String codBarras;
 
-    public Long getId() {
+    public String getCodBarras() {
+		return codBarras;
+	}
+
+	public void setCodBarras(String qrCode) {
+		this.codBarras = qrCode;
+	}
+
+	public Long getId() {
 		return id;
 	}
 

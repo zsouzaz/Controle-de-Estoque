@@ -39,4 +39,10 @@ public class ProductController {
     public List<Product> delete(@PathVariable Long id) {
         return productService.delete(id);
     }
+    
+    // Busca um prduto por código de barras;
+    @GetMapping
+    public Product findByQrCode(@RequestBody String codBarras){
+        return productService.findProductByQrCode(codBarras);
+    }
 }
