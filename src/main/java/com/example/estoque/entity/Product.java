@@ -4,15 +4,23 @@ import jakarta.persistence.*;
 import lombok.Builder;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "products")
 @Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "typeProduct")
     private String tipo;
+    
+    @Column(name = "markProduct")
     private String marca;
+    
+    @Column(name = "price")
     private Double preco;
+    
+    @Column(name = "barcode")
     private String codBarras;
 
     public String getCodBarras() {
