@@ -33,15 +33,17 @@ public class User {
 	
 	@Column(name = "key")
 	private String senha;
-	
+
+	// Cria uma tabela que irá fazer as relações entre users e todas as suas permissões.
 	@Column(name = "permissions")
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER) // Busca as permissões junto ao usuário.
 	@JoinTable(
-		name = "user_permission",
-		joinColumns = @JoinColumn(name = "user_id"),
-		inverseJoinColumns = @JoinColumn(name = "permission_id"))
+		name = "user_permission", // nome da tabela que será gerada.
+		joinColumns = @JoinColumn(name = "user_id"), // relação da tabela de usuarios.
+		inverseJoinColumns = @JoinColumn(name = "permission_id")) // relação da tabela de permissões.
 	private Set<Permission> permissoes = new HashSet<>();
-	
+
+	// Este campo dirá qual o privilégio deste usuário, no banco entende-se como uma String, mas no backend só é aceito os valores nomeados abaixo;
 	@Column(name = "users_privilege")
 	private Role privilegio;
 	
