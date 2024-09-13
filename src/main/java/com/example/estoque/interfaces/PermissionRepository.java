@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PermissionRepository extends JpaRepository<Permission, Long>{
 
+	void save(com.example.estoque.entity.Permission permission);
+
 }
