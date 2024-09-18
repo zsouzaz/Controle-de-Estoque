@@ -2,9 +2,9 @@ package com.example.estoque.controller;
 
 import com.example.estoque.entity.Product;
 import com.example.estoque.service.ProductService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 // url onde esta API deve trabalhar.
@@ -27,21 +27,31 @@ public class ProductController {
     public List<Product> findAll(){
         return productService.findAll();
     }
+    
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable Long id) {
+    	return productService.findById(id);
+    }
 
     // Requisição atualiza usuário novo de acordo com o id presente na requisição e os novos dados presente no "corpo" da requisição.
     @PutMapping(value = "/{id}")
     public List<Product> update(@PathVariable Long id, @RequestBody Product product) {
-        return productService.update(id, product);
+        try {
+    	return productService.update(id, product);
+        } catch (RuntimeException e) {
+        	System.out.println(e.getMessage());
+        }
+		return null;
     }
 
     // Deleta um usuário a partir de um ID passado na própria requisição.
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public List<Product> delete(@PathVariable Long id) {
         return productService.delete(id);
     }
     
     // Busca um prduto por código de barras;
-    @GetMapping("/{codBarras}")
+    @GetMapping("/codigo-barras/{codBarras}")
     public Product findProductByCodBarras(@PathVariable String codBarras){
         return productService.findProductByCodBarras(codBarras);
     }

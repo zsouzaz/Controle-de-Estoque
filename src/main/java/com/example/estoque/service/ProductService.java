@@ -2,6 +2,8 @@ package com.example.estoque.service;
 
 import com.example.estoque.entity.Product;
 import com.example.estoque.interfaces.ProductRepository;
+
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +32,9 @@ public class ProductService {
     }
     
     // Busca um usuário
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+    public Product findById(Long id) {
+        return productRepository.findById(id)
+        		.orElseThrow(() -> new RuntimeException("Produto não encontrado."));
     }
 
     // Deleta um usuário.
@@ -41,30 +44,16 @@ public class ProductService {
     }
 
     public List<Product> update(Long id, Product productNew) {
-        Optional<Product> optionalProduct = findById(id);
-        if (optionalProduct.isPresent()) {
-            Product productGet = optionalProduct.get();
-            //Passando as propriedades atualizadas para a entidade no banco.
-        	BeanUtils.copyProperties(productNew, productGet);
-            productRepository.save(productGet);
-        } else {
-        	// Resposta alternativa caso não encontre um usuário.
-            System.out.println("Produto com ID " + id + " não encontrado.");
-        }
+        Product productDB = findById(id);
+        //Passando as propriedades atualizadas para a entidade no banco.
+    	BeanUtils.copyProperties(productNew, productDB);
+        productRepository.save(productDB);
         // Retorna todos os usuários se atualizado ou não.
 		return findAll();
     }
     
     public Product findProductByCodBarras(String codBarras) {
-    	Optional<Product> optionalProduct = productRepository.findProductByCodBarras(codBarras);
-    	if (optionalProduct.isPresent()) {
-    		Product productGet = null;
-    		BeanUtils.copyProperties(optionalProduct, productGet);
-    		return productGet;
-    	} else {
-        	// Resposta alternativa caso não encontre um usuário.
-            System.out.println("Produto não encontrado.");
-        }
-    	return null;
+    	return productRepository.findProductByCodBarras(codBarras)
+    			.orElseThrow(() -> new RuntimeException("Produto não encontrado."));
     }
 }
