@@ -5,7 +5,7 @@ import com.example.estoque.interfaces.PermissionRepository;
 
 @Service
 public class PermissionService {
-	private PermissionRepository permissionRepository;
+	private final PermissionRepository permissionRepository;
 	
 	public PermissionService(PermissionRepository permissionRepository) {
 		this.permissionRepository = permissionRepository;

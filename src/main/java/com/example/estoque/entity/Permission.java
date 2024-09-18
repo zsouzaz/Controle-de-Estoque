@@ -1,16 +1,13 @@
 package com.example.estoque.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "permissions")
-@Builder
 // Esta entidade armazena as funcionalidades do sistema que poderá ser atribuídas aos usuários para que possam ser executadas.
 public class Permission {
-	@Id
+
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -19,6 +16,10 @@ public class Permission {
 	@Column(name = "permission_name")
 	private String nomePermissao;
 
+	public Permission() {
+
+	}
+
 	public String getNamePermission() {
 		return nomePermissao;
 	}
@@ -26,5 +27,6 @@ public class Permission {
 	public void setNamePermission(String nomePermissao) {
 		this.nomePermissao = nomePermissao;
 	}
+
 }
  

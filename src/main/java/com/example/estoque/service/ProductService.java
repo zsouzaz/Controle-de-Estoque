@@ -55,7 +55,7 @@ public class ProductService {
 		return findAll();
     }
     
-    public Product findProductByQrCode(String codBarras) {
+    public Product findProductByCodBarras(String codBarras) {
     	Optional<Product> optionalProduct = productRepository.findProductByCodBarras(codBarras);
     	if (optionalProduct.isPresent()) {
     		Product productGet = null;

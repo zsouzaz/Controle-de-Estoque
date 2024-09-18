@@ -2,8 +2,8 @@ package com.example.estoque.controller;
 
 import com.example.estoque.entity.Product;
 import com.example.estoque.service.ProductService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     // Requisição atualiza usuário novo de acordo com o id presente na requisição e os novos dados presente no "corpo" da requisição.
-    @PutMapping(value = "{id}")
+    @PutMapping(value = "/{id}")
     public List<Product> update(@PathVariable Long id, @RequestBody Product product) {
         return productService.update(id, product);
     }
@@ -41,8 +41,8 @@ public class ProductController {
     }
     
     // Busca um prduto por código de barras;
-    @GetMapping
-    public Product findByQrCode(@RequestBody String codBarras){
-        return productService.findProductByQrCode(codBarras);
+    @GetMapping("/{codBarras}")
+    public Product findProductByCodBarras(@PathVariable String codBarras){
+        return productService.findProductByCodBarras(codBarras);
     }
 }

@@ -2,9 +2,6 @@ package com.example.estoque.entity;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.management.relation.Role;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,6 +13,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Users")
@@ -25,13 +24,19 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name")
+	@Setter
+    @Getter
+    @Column(name = "name")
 	private String nome;
 	
-	@Column(name = "email")
+	@Setter
+    @Getter
+    @Column(name = "email")
 	private String email;
 	
-	@Column(name = "key")
+	@Setter
+    @Getter
+    @Column(name = "key")
 	private String senha;
 
 	// Cria uma tabela que irá fazer as relações entre users e todas as suas permissões.
@@ -44,35 +49,24 @@ public class User {
 	private Set<Permission> permissoes = new HashSet<>();
 
 	// Este campo dirá qual o privilégio deste usuário, no banco entende-se como uma String, mas no backend só é aceito os valores nomeados abaixo;
-	@Column(name = "users_privilege")
+	@Setter
+    @Getter
+    @Column(name = "users_privilege")
 	private Role privilegio;
-	
-	public enum Role {
-	    USER, ADMIN;
+
+    public User() {
+    }
+
+    public User(Long id, String nome, String email, String senha, Set<Permission> permissoes, Role privilegio) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.permissoes = permissoes;
+        this.privilegio = privilegio;
+    }
+
+    public enum Role {
+	    USER, ADMIN
 	}
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Role getPrivilegio() {
-		return privilegio;
-	}
-	public void setPrivilegio(Role privilegio) {
-		this.privilegio = privilegio;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}	
 }
