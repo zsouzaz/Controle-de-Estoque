@@ -1,5 +1,6 @@
 package com.example.estoque.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,14 +18,20 @@ import com.example.estoque.interfaces.UserRepository;
 @Service
 public class UserService {
 	private UserRepository userRepository;
+	private PermissionService permissionService;
 	
 	// injetando dependencias.
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, PermissionService permissionService) {
 		this.userRepository = userRepository;
+		this.permissionService = permissionService;
 	}
 	
 	// Adiciona as permissões ao usuário e persiste no banco.
-	public void createUser(User user, Set<Permission> permissions) {
+	public void createUser(User user, List<Long> ids) {
+		Set<Permission> permissions = new HashSet<Permission>();
+		ids.forEach(id -> {
+			permissions.add(permissionService.findPermissionById(id));
+		});
 		user.setPermissoes(permissions); // Quando o service das permissões for finalizado, fazer as buscas por ele aqui. Deverá receber somente os ID's as permissões.
 		userRepository.save(user);
 	}
