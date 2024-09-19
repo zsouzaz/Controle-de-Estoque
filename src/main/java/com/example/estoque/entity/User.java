@@ -24,18 +24,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Setter
-    @Getter
     @Column(name = "name")
 	private String nome;
-	
-	@Setter
-    @Getter
+
     @Column(name = "email")
 	private String email;
 	
-	@Setter
-    @Getter
     @Column(name = "key")
 	private String senha;
 
@@ -49,8 +43,7 @@ public class User {
 	private Set<Permission> permissoes = new HashSet<>();
 
 	// Este campo dirá qual o privilégio deste usuário, no banco entende-se como uma String, mas no backend só é aceito os valores nomeados abaixo;
-	@Setter
-    @Getter
+
     @Column(name = "users_privilege")
 	private Role privilegio;
 
@@ -69,4 +62,46 @@ public class User {
     public enum Role {
 	    USER, ADMIN
 	}
+    
+    public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Set<Permission> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(Set<Permission> permissoes) {
+		this.permissoes = permissoes;
+	}
+
+	public Role getPrivilegio() {
+		return privilegio;
+	}
+
+	public void setPrivilegio(Role privilegio) {
+		this.privilegio = privilegio;
+	}
+	
+	
 }
