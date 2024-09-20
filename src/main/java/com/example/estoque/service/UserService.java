@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.estoque.entity.Permission;
 import com.example.estoque.entity.User;
+import com.example.estoque.entity.UserRequestDTO;
 import com.example.estoque.interfaces.UserRepository;
 
 // Criando regras de negócio para classe usuários
@@ -27,11 +28,13 @@ public class UserService {
 	}
 	
 	// Adiciona as permissões ao usuário e persiste no banco.
-	public void createUser(User user, List<Long> ids) {
+	public void createUser(UserRequestDTO userRequestDTO) {
+		User user = new User();
 		Set<Permission> permissions = new HashSet<Permission>();
-		ids.forEach(id -> {
+		userRequestDTO.getPermissions().forEach(id -> {
 			permissions.add(permissionService.findPermissionById(id));
 		});
+		BeanUtils.copyProperties(userRequestDTO.getUser(), user);
 		user.setPermissoes(permissions); // Quando o service das permissões for finalizado, fazer as buscas por ele aqui. Deverá receber somente os ID's as permissões.
 		userRepository.save(user);
 	}
@@ -48,14 +51,14 @@ public class UserService {
 	}
 	
 	// Atualizar usuários.
-	public User updateUser(Long id, User user, List<Long> newPermissions) {
+	public User updateUser(Long id, UserRequestDTO userRequestDTO) {
 		User userDB = findUserById(id);
 		Set<Permission> permissions = new HashSet<Permission>();
-		newPermissions.forEach(ids -> {
+		userRequestDTO.getPermissions().forEach(ids -> {
 			permissions.add(permissionService.findPermissionById(ids));
 		});
+		BeanUtils.copyProperties(userRequestDTO.getUser(), userDB);
 		userDB.setPermissoes(permissions);
-		BeanUtils.copyProperties(user, userDB);
 		return userRepository.save(userDB);
 	}
 	

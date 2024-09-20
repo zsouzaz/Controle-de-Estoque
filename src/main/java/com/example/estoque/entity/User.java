@@ -29,7 +29,7 @@ public class User {
     @Column(name = "email")
 	private String email;
 	
-    @Column(name = "key")
+    @Column(name = "password")
 	private String senha;
 
 	// Cria uma tabela que irá fazer as relações entre users e todas as suas permissões.

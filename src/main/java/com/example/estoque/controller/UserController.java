@@ -19,7 +19,7 @@ public class UserController {
 	// Método HTTP responsável por receber a requisição para criar usuário.
 	@PostMapping
 	public void createUser(@RequestBody UserRequestDTO userRequestDTO) {
-		userService.createUser(userRequestDTO.getUser(), userRequestDTO.getPermissions());
+		userService.createUser(userRequestDTO);
 	}
 
 	// Busca usuário por ID.
@@ -36,8 +36,8 @@ public class UserController {
 
 	// Edita usuário.
 	@PutMapping("/{id}")
-	public User updateUser(@PathVariable Long id, @RequestBody User user, @RequestBody List<Long> permissoes) {
-		return userService.updateUser(id, user, permissoes);
+	public User updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO) {
+		return userService.updateUser(id, userRequestDTO);
 	}
 
 	// Deleta usuário por ID.
