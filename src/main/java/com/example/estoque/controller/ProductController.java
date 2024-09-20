@@ -4,7 +4,6 @@ import com.example.estoque.entity.Product;
 import com.example.estoque.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 // url onde esta API deve trabalhar.
@@ -12,6 +11,7 @@ import java.util.Optional;
 public class ProductController {
     private ProductService productService;
 
+    // Injeção de dependências.
     public ProductController(ProductService productService) {
         this.productService = productService;
     }

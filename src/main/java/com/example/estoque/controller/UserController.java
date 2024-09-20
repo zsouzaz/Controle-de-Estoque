@@ -1,17 +1,13 @@
 package com.example.estoque.controller;
 
-import java.util.Set;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.util.List;
+import com.example.estoque.entity.UserRequestDTO;
+import org.springframework.web.bind.annotation.*;
 import com.example.estoque.entity.User;
 import com.example.estoque.service.UserService;
 
-@Controller
-@RequestMapping(name = "/users")
+@RestController
+@RequestMapping("/users")
 public class UserController {
 	private UserService userService;
 	
@@ -19,10 +15,36 @@ public class UserController {
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	// Método HTTP responsável por receber a requisição para criar usuário.
 	@PostMapping
-	public void createUser(@RequestBody User user, @RequestBody Set<String> permissoes) {
-	//	userService.createUser(user, permissoes);
+	public void createUser(@RequestBody UserRequestDTO userRequestDTO) {
+		userService.createUser(userRequestDTO.getUser(), userRequestDTO.getPermissions());
+	}
+
+	// Busca usuário por ID.
+	@GetMapping("/{id}")
+	public User findUserById(@PathVariable Long id) {
+		return userService.findUserById(id);
+	}
+
+	// Busca todos usuários.
+	@GetMapping
+	public List<User> findAllUsers() {
+		return userService.findAllUsers();
+	}
+
+	// Edita usuário.
+	@PutMapping("/{id}")
+	public User updateUser(@PathVariable Long id, @RequestBody User user, @RequestBody List<Long> permissoes) {
+		return userService.updateUser(id, user, permissoes);
+	}
+
+	// Deleta usuário por ID.
+	@DeleteMapping("/{id}")
+	public void deleteUserById(@PathVariable Long id) {
+		userService.deleteUser(
+				userService.findUserById(id)
+		);
 	}
 }

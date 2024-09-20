@@ -48,8 +48,13 @@ public class UserService {
 	}
 	
 	// Atualizar usuários.
-	public User updateUser(Long id, User user) {
+	public User updateUser(Long id, User user, List<Long> newPermissions) {
 		User userDB = findUserById(id);
+		Set<Permission> permissions = new HashSet<Permission>();
+		newPermissions.forEach(ids -> {
+			permissions.add(permissionService.findPermissionById(ids));
+		});
+		userDB.setPermissoes(permissions);
 		BeanUtils.copyProperties(user, userDB);
 		return userRepository.save(userDB);
 	}

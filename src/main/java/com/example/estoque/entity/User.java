@@ -13,13 +13,12 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "Users")
 @Builder
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -44,19 +43,19 @@ public class User {
 
 	// Este campo dirá qual o privilégio deste usuário, no banco entende-se como uma String, mas no backend só é aceito os valores nomeados abaixo;
 
-    @Column(name = "users_privilege")
-	private Role privilegio;
+    @Column(name = "users_previlege")
+	private Role previlegio;
 
     public User() {
     }
 
-    public User(Long id, String nome, String email, String senha, Set<Permission> permissoes, Role privilegio) {
+    public User(Long id, String nome, String email, String senha, Set<Permission> permissoes, Role previlegio) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.permissoes = permissoes;
-        this.privilegio = privilegio;
+        this.previlegio = previlegio;
     }
 
     public enum Role {
@@ -95,12 +94,12 @@ public class User {
 		this.permissoes = permissoes;
 	}
 
-	public Role getPrivilegio() {
-		return privilegio;
+	public Role getPrevilegio() {
+		return previlegio;
 	}
 
-	public void setPrivilegio(Role privilegio) {
-		this.privilegio = privilegio;
+	public void setPrevilegio(Role privilegio) {
+		this.previlegio = privilegio;
 	}
 	
 	
