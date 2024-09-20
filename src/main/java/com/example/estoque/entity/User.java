@@ -43,19 +43,19 @@ public class User {
 
 	// Este campo dirá qual o privilégio deste usuário, no banco entende-se como uma String, mas no backend só é aceito os valores nomeados abaixo;
 
-    @Column(name = "users_previlege")
-	private Role previlegio;
+    @Column(name = "users_privilege")
+	private Role privilegio;
 
     public User() {
     }
 
-    public User(Long id, String nome, String email, String senha, Set<Permission> permissoes, Role previlegio) {
+    public User(Long id, String nome, String email, String senha, Set<Permission> permissoes, Role privilegio) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.permissoes = permissoes;
-        this.previlegio = previlegio;
+        this.privilegio = privilegio;
     }
 
     public enum Role {
@@ -94,12 +94,12 @@ public class User {
 		this.permissoes = permissoes;
 	}
 
-	public Role getPrevilegio() {
-		return previlegio;
+	public Role getPrivilegio() {
+		return privilegio;
 	}
 
-	public void setPrevilegio(Role privilegio) {
-		this.previlegio = privilegio;
+	public void setPrivilegio(Role privilegio) {
+		this.privilegio = privilegio;
 	}
 	
 	
