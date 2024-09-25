@@ -1,4 +1,4 @@
-package com.example.estoque.entity;
+package com.zsouzaz.estoque.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

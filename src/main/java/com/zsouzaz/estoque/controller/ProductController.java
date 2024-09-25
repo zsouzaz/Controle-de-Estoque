@@ -1,8 +1,10 @@
-package com.example.estoque.controller;
+package com.zsouzaz.estoque.controller;
 
-import com.example.estoque.entity.Product;
-import com.example.estoque.service.ProductService;
 import org.springframework.web.bind.annotation.*;
+
+import com.zsouzaz.estoque.entity.Product;
+import com.zsouzaz.estoque.service.ProductService;
+
 import java.util.List;
 
 @RestController
@@ -16,13 +18,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // Requisição que recebe um "corpo" para a criação de novo usuário.
     @PostMapping
     public List<Product> create(@RequestBody Product product) {
         return productService.create(product);
     }
 
-    // Requisição retorna todos os usuários do banco.
     @GetMapping
     public List<Product> findAll(){
         return productService.findAll();
@@ -33,7 +33,6 @@ public class ProductController {
     	return productService.findById(id);
     }
 
-    // Requisição atualiza usuário novo de acordo com o id presente na requisição e os novos dados presente no "corpo" da requisição.
     @PutMapping(value = "/{id}")
     public List<Product> update(@PathVariable Long id, @RequestBody Product product) {
         try {
@@ -44,13 +43,11 @@ public class ProductController {
 		return null;
     }
 
-    // Deleta um usuário a partir de um ID passado na própria requisição.
     @DeleteMapping(value = "/{id}")
     public List<Product> delete(@PathVariable Long id) {
         return productService.delete(id);
     }
     
-    // Busca um prduto por código de barras;
     @GetMapping("/codigo-barras/{codBarras}")
     public Product findProductByCodBarras(@PathVariable String codBarras){
         return productService.findProductByCodBarras(codBarras);

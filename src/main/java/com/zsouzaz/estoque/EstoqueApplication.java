@@ -1,4 +1,4 @@
-package com.example.estoque;
+package com.zsouzaz.estoque;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

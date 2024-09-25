@@ -1,4 +1,4 @@
-package com.example.estoque.entity;
+package com.zsouzaz.estoque.entity;
 
 import jakarta.persistence.*;
 
@@ -16,9 +16,7 @@ public class Permission {
 	@Column(name = "permission_name")
 	private String nomePermissao;
 
-	public Permission() {
-
-	}
+	public Permission() {}
 
 	public String getNamePermission() {
 		return nomePermissao;
@@ -27,6 +25,4 @@ public class Permission {
 	public void setNamePermission(String nomePermissao) {
 		this.nomePermissao = nomePermissao;
 	}
-
 }
- 

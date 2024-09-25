@@ -1,4 +1,4 @@
-package com.example.estoque.entity;
+package com.zsouzaz.estoque.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -62,6 +62,10 @@ public class User {
 	    USER, ADMIN
 	}
     
+    public Long getId() {
+		return id;
+	}
+	
     public String getNome() {
 		return nome;
 	}
