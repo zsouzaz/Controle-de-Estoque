@@ -1,5 +1,6 @@
 package com.zsouzaz.estoque.authentication;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +12,8 @@ public class AuthenticationController {
 		this.authenticationService = authenticationService;
 	}
 	 
-	@PostMapping("/authenticate")
+	@PostMapping("authenticate")
 	public String authenticate() {
-		return authenticationService.authentication();
+		return authenticationService.authenticate(); 
 	}
 }
