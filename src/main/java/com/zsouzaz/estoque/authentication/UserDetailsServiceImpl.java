@@ -2,9 +2,11 @@ package com.zsouzaz.estoque.authentication;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.zsouzaz.estoque.interfaces.UserRepository;
 
+@Service
 public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
 	private final UserRepository userRepository;
 	
