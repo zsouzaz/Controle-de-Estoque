@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.zsouzaz.estoque.entity.Permission;
@@ -20,6 +22,8 @@ import com.zsouzaz.estoque.interfaces.UserRepository;
 public class UserService {
 	private UserRepository userRepository;
 	private PermissionService permissionService;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	
 	// injetando dependencias.
 	public UserService(UserRepository userRepository, PermissionService permissionService) {
@@ -35,11 +39,12 @@ public class UserService {
 		});
 		BeanUtils.copyProperties(userRequestDTO.getUser(), user);
 		user.setPermissoes(permissions);
+		user.setSenha(passwordEncoder.encode(userRequestDTO.getUser().getSenha()));
 		userRepository.save(user);
 	}
 	
 	public User findUserByName(String name) {
-		return userRepository.findUserByName(name)
+		return userRepository.findUserByNome(name)
 				.orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 	}
 	
@@ -60,6 +65,7 @@ public class UserService {
 		});
 		BeanUtils.copyProperties(userRequestDTO.getUser(), userDB);
 		userDB.setPermissoes(permissions);
+		userDB.setSenha(passwordEncoder.encode(userRequestDTO.getUser().getSenha()));
 		return userRepository.save(userDB);
 	}
 	

@@ -1,4 +1,4 @@
-package com.zsouzaz.estoque.authentication;
+package com.zsouzaz.estoque.config;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
